@@ -1,18 +1,20 @@
 資料預處理
 
-id - 原始資料中的識別號碼
-time - 原始時間戳記
-location_start - 起始位置代碼
-time_end - 結束時間戳記
-location_end - 結束位置代碼
-value - 數值資料(可能是距離或行駛時間)
+cluster: 用於識別數據中的群集，幫助發現相似的數據點。
+day - 從時間戳記提取的日
 flag - 標記欄位(Y/N)
-path_info - 路徑資訊
-衍生特徵欄位：
-timestamp - 轉換後的pandas日期時間格式
-year, month, day - 從時間戳記提取的年月日
-weekday - 星期幾(0-6，0是週一)
 hour - 小時(0-23)
-time_period - 時段分類(凌晨/上午/下午/晚間)
-is_weekend - 是否為週末(1)或平日(0)
+id - 原始資料中的識別號碼
 is_peak - 是否為尖峰時段(1)或非尖峰時段(0)
+is_weekend - 是否為週末(1)或平日(0)
+location_end - 結束位置代碼
+location_start - 起始位置代碼
+month - 從時間戳記提取的月
+path_info - 路徑資訊
+time - 原始時間戳記
+time_end - 結束時間戳記
+time_period - 時段分類(凌晨/上午/下午/晚間)
+timestamp - 轉換後的pandas日期時間格式
+value - 數值資料(可能是距離或行駛時間)
+weekday - 星期幾(0-6，0是週一)
+year - 從時間戳記提取的年
