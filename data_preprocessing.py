@@ -6,6 +6,7 @@ import sys
 from datetime import datetime
 import pandas as pd
 import numpy as np
+from sklearn.cluster import KMeans
 
 def process_chunk_cpu(chunk):
     """使用CPU處理資料區塊"""
@@ -71,6 +72,16 @@ def process_chunk_cpu(chunk):
     
     return chunk
 
+def apply_clustering(data):
+    # Select features for clustering
+    features = data[['value', 'hour', 'is_peak']]
+    
+    # Apply K-means clustering
+    kmeans = KMeans(n_clusters=3, random_state=42)
+    data['cluster'] = kmeans.fit_predict(features)
+    
+    return data
+
 def main():
     # 設定資料路徑
     input_dir = 'D:/highway_output'
@@ -81,13 +92,13 @@ def main():
     
     # 設定輸入和輸出檔案路徑
     input_file = os.path.join(input_dir, '2024_M06A.csv')
-    output_file = os.path.join(output_dir, 'processed_data.csv')
+    output_file = os.path.join(output_dir, '2024_complete.csv')
     
     print(f"\n開始資料預處理... (CPU模式)")
     print(f"讀取檔案：{input_file}")
     
     # 設定分批大小
-    chunk_size = 100000
+    chunk_size = 1000000
     
     # 檢查檔案是否存在
     if not os.path.exists(input_file):
@@ -138,6 +149,9 @@ def main():
             
             # 處理資料
             processed_chunk = process_chunk(chunk)
+            
+            # 應用聚類
+            processed_chunk = apply_clustering(processed_chunk)
             
             # 儲存處理後的資料
             if chunk_num == 1:
