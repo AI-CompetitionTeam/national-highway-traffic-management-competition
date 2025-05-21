@@ -1,4 +1,4 @@
-#可看100筆資料
+#可查看100筆資料
 import os
 import pandas as pd
 
